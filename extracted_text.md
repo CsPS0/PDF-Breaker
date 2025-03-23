@@ -1,0 +1,1972 @@
+Page 1:
+Linux | Docker | Docker Compose
+
+TARTALOMJEGYZEK
+1. VM-ck és konténerek wc eeccccceecsecessseeessecescseseseseeeeseeeceseasseeraeseceeeseseeseeeeeeeeseasecseeeassceracseeeseseseeneenes 1
+1.1 Virtualis 26p (VM) ..eeeeceseccscnseceeeeeeececaeseceaeseeeeeecearseeeeesecaenseceacaeeeeecaaneeaeesesaanseanaraeeneetecaentecearecaee 1
+Pe lL le 2
+2. DOCK sstccssieseaseiaoasnariasineamennnannaiarananna nga ctcaremaniacies MMC aees 3
+3, Linux (Debian) telepitése és konfiguralasa siviccisccces cians MOUs ceanesrcrse cca cianulgeim cresneveien 5
+3.1 A Sudo beallitasa....ccccecseesesesessesessecsscacseccseseseeseceisecsseeceessaseecsaeseseseseeeeseenssecasesecaseses 7
+3.2 IP cimzés konfiguralasa............ccceseesesesesssecsscecssssscseesseessceessecssscscssssaassesesssesesnsnesseceascesaseseseenseees 7
+3.3 DNS konfiguralasa .
+3.4 A ,,Guest Additions” kiegészitd telepitG Sone: ..........c.0:, WEED eserevessrseesteeerees EERIE otseersvasen suse 8
+3.5 Td6z6na konfiguralasa:.......c.sesesss sa MRieees voeceeseceeesreceri es pet ns s0ce sees ERE oe oeee ve 8
+4, A Docker telepitese «.. ccccscccecserieiesises cr Ring a0 oreo ge cs acn acne ER aca as saeenneae Net 9
+5. A Docker Hub és haszndlata ..0...cceceeeeeeeeeneneneeeeeeeeeeeeseseeisenneeeiseneeeasseenseseseeeseeeenenaeee 10
+5.1 Keresés a Docker Hub-00....cceceiseeeeeeenseneneeeeeceeeseseesiseeiseesensaeneseeasseenaeseseeteseanennees 10
+5.2 Kép (image) letéltése a Docker Hub-r0l .......c cee sceseeeseessscetenecnescaeeseeesseeesssceesesenerecseesseenenss 11
+5.3 Architekturak ....cccccecceecsesesssecessseccseseseseseeecseacesscceacscccaeseceeeseceensecasseeceacacsceeasseceecseseeeseseeeeearsees 12
+
+6.5 Interaktiv Bash inditasa egy kontémerben..........cccccssscceesssesessseeesseeeeeceeeeeenscacsssceseseseceeeseeeeneeeneees 16
+OWS ebszetyetmmlepitése GMPC erbe:..... MMmee-scvsacovesscvessnienssesestsenenssevesnsevsesoersseresssienssesestaeeetseeousees 16
+6, BBROTte nero RGN ekg isc ZCL ESC... AMMO siscasissevesveenssvauaniiensntiesessseossvasisuesie tensa saantienentienei teenies 18
+7. Volume-Ok oe cececccecccceeeseseseceeesesesseceacsescececeeeseseeeseseacseaeacseeeaeeeeeeeeceeeeaeecseeeseeeasseeeasseeeeeeeeeeeeeeeeseaearaees 20
+8. Kérnyezeti valtozok (Environment Variables) .......cccecsecceecseseeetesesseceaeseasseceaeeeeeeseeeeeeeseeesaeeraees 21
+9. A Docker és a Visual Studio Code dsszekapcsolasa .....cccccceceeseeesceeieneesenesenesenssseenesenenes 23
+9.1 Konténerek kezelése VSCode-bann ......ceccsceesceeeseceeseeseseceessecnsesesnssessseeseeseeesssseasssennnecennseeeneces 29
+10. Szolgaltatasok dsszekapcsolasa (tobb konténer egyidejti futtatasa) ....... cece eects 33
+10.1 Joomla! CMS tendszer telepitése Docker Kontenerbe vcccesssiscscssacserennmancoonsereamureecvneccens 23
+
+1]. A Docker Gotnpse «ccsssavisnsessniies ceneauacvnaieun wns ciseanaviuetens sccsmsaniiunedns conan ccbennenieietn cemmeaumnmednet 38
+
+==================================================
+Page 2:
+11.1 YAML fajl létrehozasa és konfiguralasa (WordPress telepitése) .... ec ecceeceeeeeseecnetteceeeeeees 38
+
+11.2 A. Docker Compose héz@lese scscsssscsnisienns scssarenenean ccnanmemsncnmmcinaenmsaummneinccinnivenmammsunn ck 43
+12. A Docker file ccc ccccccececceetecenssecerseccecsesesseceeeieeesieecsseescsecsseseeeeieecesieeseecsieersscerseseeeeseeeseeetiees 44
+12.1 A Dockerfile felépitése oc ccccececnenseceaeeeseececaeseeeesecaenseceareceeeecaesecearaceenseceareeenesecaaneeeearaee 45
+
+12.2 Egyszerii Shell script futtatasa, image készitése
+13, Feladatok
+
+A telepitéseknél az operaciés rendszer ujabb verzidjat is hasznalhatjuk! Mindig
+
+ellen6érizztik, hogy a hivatalos let6ltési oldalon van-e ujabb megjelenés!
+
+A segédletet a készité engedélye és beleegyezése nélkiil felhasznalni és masolni szigoruan tilos!
+
+==================================================
+Page 3:
+1. VM-ek és konténerek
+A konténerek és a VM-ek k6zotti kiilénbség:
+
+A virtualis gépek (VM) és a konténerek két népszerti technologia az informatikai rendszerek
+
+virtualizacidjahoz, de eltéré modon mukédnek és kiilénb6z6 felhasznalasi célokra alkalmasak.
+
+A legfébb ktilénbségeik az architekturaban, az erdforras-kezelésben és a hordozhatosagban
+
+rejlenek.
+
+L.1 Virtudlis gép (VM)
+
+Architektura:
+
+A virtualis gépek a fizikai hardvert teljes mértékben virtualizaljak.
+
+Minden VM sajat operacids rendszert futtat (guest OS), amely egy hypervisor (példaul
+VirtualBox, VMware, Hyper-V, vagy KVM) segitségével fut a gazdarendszer felett.
+Er6forras-kezelés:
+
+A VM-ek er6forras-igénye altalaban nagyobb, mivel minden VM-nek sziiksége van egy teljes
+
+operacids rendszerre, amely memoria- és tarhelyigénnyel jar.
+
+Nehezebben skalazhatok, mivel az operacios rendszer inditasa idéigényes lehet.
+
+Hordozhatésag:
+
+A VM-eket egyszertien lehet mas rendszerekre athelyezni, de a nagy méretiik miatt a folyamat
+lassabb.
+
+Izolacié:
+
+A VM-ek teljes izolaciot biztositanak, mivel minden VM-nek sajat operacids rendszere és
+kernelje van, ami nagyobb biztonsagot jelenthet.
+
+Felhasznalasi teriilet:
+
+Idealis meglév6 rendszerek futtatasara, ktil6ndsen, ha eltéré operacids rendszerek sziikségesek.
+
+© 2025 | Bok Péter
+
+==================================================
+Page 4:
+1.2 Konténer
+
+Architektura:
+
+A konténerek az operacios rendszer szintjén muk6dnek, és megosztjak a gazdagép (host OS)
+
+kernelét.
+
+Egy konténerben csak az alkalmazas és annak futtatasahoz sztikséges fiiggdségek talalhatok,
+nincs sajat operacios rendszeriik.
+
+Er6forras-kezelés:
+
+A konténerek kénnytisulyuak, gyorsan indithatok és kevesebb er6forrast igényelnek, mivel nem
+
+futtatnak teljes operacidos rendszert.
+
+Kivaloan skalazhatok, kiilonésen dinamikus kérnyezetekben, példaul mikroszolgaltatasoknal.
+
+Hordozhatésag:
+
+A konténerek is kénnyen hordozhatok, mert ugyanugy futtathatok a fejlesztéi gépen, mint a
+gyartasi kérnyezetben, ha ugyanaz a konténer runtime (pl. Docker) érhets el.
+
+Tzolacio:
+
+Kevésbé izolaltak, mivel osztoznak a gazdarendszer kernelén. Ez kisebb biztonsagot nyujthat,
+de gyakran megfelelé izolaciot biztositanak a legtobb alkalmazas szamara.
+
+Felhasznalasi teriilet:
+
+Idealis modern, felhdéalapt alkalmazasokhoz és mikroszol galtatas-alapu architekturakhoz.
+
+Osszehasonlitas:
+
+Jellemzé Virtualis gép (VM) Konténer
+
+OS sziikséglet Sajat operaciés rendszer Host OS-t haszndlja
+Er6forras-igény Magas Alac
+
+Inditasi id6 Lass Gyors
+
+Izolacio Erés Mérsékelt
+
+Hordozhatésag Nagy fajlméret miatt lassabb K6nnyd és gyors
+
+Skalazhatésag Kevésbé rugalmas Nagyon rugalmas
+
+Biztonsag Jobb izolacié miatt magasabb Figg a host kernelétél
+
+© 2025 | Bok Péter
+
+==================================================
+Page 5:
+A valasztas a konkrét hasznalati esettdl fiigg: ha teljes izolacidra és eltéré operacids
+rendszerekre van sztikség, a VM lehet a jobb valasztas. Ha pedig gyors inditas, konnyt
+
+hordozhatosag és skalazhatosag a cél, a konténerek elénydésebbek.
+
+2. Docker
+
+A Docker egy nyilt forraskodu platform, amely lehetévé teszi az alkalmazasok és azok
+fiiggdségeinek konténerekbe csomagolasat, futtatasat és kezelését. A konténerek konnytsulyu,
+izolalt kornyezetek, amelyek az alkalmazasok futtatasahoz sziikséges dsszes komponenssel
+rendelkeznek (pl. kod, konyvtarak, konfiguraciok), és azonos médon mukédnek a fejlesztéi
+
+gépen, a tesztelési kormyezetben és a gyartasban.
+
+F6bb osszetevéi:
+
+- Docker Engine: A konténerek futtatasdért, kezeléséért és létrehozasaért felelds motor.
+
+- Docker Daemon: A hattérben futo szolgaltatas, amely a konténerek kezelését végzi.
+
+- CLI (Command Line Interface): Egy parancssoros eszkéz, amely a Docker miveletek
+végrehajtasara szolgal.
+
+- Docker Images: A konténerek sablonjai, amelyek tartalmazzak az alkalmazas kédjat és
+figgdségeit. Ezekbdl indulnak el a konténerek.
+
+- Docker Containers: Az image-ek futo példanyai, amelyek izolalt kornyezetet biztositanak az
+alkalmazasok szamara.
+
+- Docker Hub: Egy felhdalapu regisztracids szolgaltatas, ahol elore elkészitett Docker image-
+
+eket lehet tarolni és megosztani.
+
+Eldényei:
+
+1. Hordozhatosag
+
+A Docker konténerek azonos modon futnak minden platformon, amely tamogatja a Docker
+Engine-t. Ez megk6nnyiti az alkalmazasok atvitelét a fejlesztdi, tesztelési és gyartasi
+komyezetek k6zétt.
+
+2. Gyors inditas
+
+A konténerek konnyustlytak, és nines sziikségiik kiilén operacidés rendszerre, igy gyorsabban
+
+indithatok, mint a virtualis gépek.
+
+© 2025 | Bok Péter
+
+==================================================
+Page 6:
+3. Eréforras-hatékonysag
+
+A konténerek megosztjak a gazdarendszer kernelét, igy kevesebb erdforrast fogyasztanak, mint
+a virtualis gépek.
+
+4. Modularitas
+
+A Docker tamogatja az alkalmazasok mikroszolgaltatas-alapu felépitését, amelyben az
+alkalmazas kisebb, kiilénallo konténerekbol all, amelyek egy adott funkciot valésitanak meg.
+
+Ez javitja a skalazhatosagot és a hibak elkiilonitését.
+
+5. Kénnyti skalazas
+
+A Docker konténerek gyorsan klonozhatok és tobb példanyban is futtathatok, ami idealis a nagy
+terheléstt alkalmazasokhoz.
+
+6. Fiiggetlenség a gazdarendszert6l
+
+A konténerekben futo alkalmazasok fiiggetlenek a gazdarendszer konfiguracigjatol, mivel
+minden sztikséges figgéséget tartalmaznak.
+
+7. Egyszeriti telepités
+
+A Docker hasznalataval az alkalmazasok és azok futtatasi kérnyezete "egyiitt csomagolhato",
+igy kénnyen és gyorsan telepithet6k.
+
+8. Széles kérti tamogatas
+
+A Docker az iparagi szabvany lett a konténerizacio terén, és szamos nyilt forraskodu eszk6z,
+példaul Kubernetes, tamogatja a hasznalatat.
+
+Tipikus felhasznalasi esetei:
+
+- Fejlesztoi kérnyezetek beallitasa: Gyorsan és kévetkezetesen eldallithatok fejlesztdi
+kornyezetek.
+
+- CVCD (folyamatos integracio/folyamatos szadllitas): Automatizalt tesztelési és telepitési
+folyamatok.
+
+- Mikroszolgdltatasok: Kilénallo szolgaltatasok futtatasa kil6én konténerekben.
+
+- Monolitikus alkalmazdsok modernizdldsa: Régi alkalmazasok becsomagolasa konténerekbe a
+
+korszertisitéshez.
+
+© 2025 | Bok Péter
+
+==================================================
+Page 7:
+- Tobbkérnyezeti alkalmazdsfejlesztés: Azonos konfiguracid biztositasa a ktil6nbozd
+kémyezetekben (pl. fejlesztés, tesztelés, gyartas).
+Miért népszerti a Docker?
+
+A Docker leegyszertsiti az alkalmazasok fejlesztését, tesztelését és telepitését, mikézben
+minimalizalja a "mukédik a gépemen, de mashol nem" tipust problémakat. Ez az egyszertiség,
+rugalmassag és erdforras-hatékonysag tette a Dockert a konténerizacio egyik legnépszeribb
+
+eszk6zévé.
+
+3. Linux (Debian) telepitése és konfiguralasa
+Hozzunk létre a VirtualBox-ban egy uj virtudlis gépet az alabbiak szerint:
+
+Name: linux_docker
+
+Type: Linux
+
+Subtype: Debian
+
+Version: Debian 12 Bookworm (64 bit)
+Base Memory: 4GB
+
+Processors: 2
+
+A memoria mennyisége és a CPU magok szama a gazdagépben lév6 fizikai RAM
+mennyiségének és CPU magok szamanak fiiggvénye!
+
+Disk Size: 30 GB
+
+A virtudlis gép konfiguralasa:
+
+General/Advanced > Shared Clipboard: Bidirectional | Drag’n’ Drop: Bidirectional
+System/Motherboard > Boot Order: floppy-t vegyiik ki a boot sorrendbél
+
+Storage: helyezziik be az optikai meghajt6ba a Debian ISO-t, a vdi lemezképre kapcsoljuk be
+a Solid-state Drive-ot (amennyiben SSD-re telepitiink)
+
+Network/Adapter 1: NAT
+
+Network/Adapter 2: Host-only Adapter
+
+© 2025 | Bok Péter
+
+==================================================
+Page 8:
+A telepités menete és paraméterei:
+
+Install
+
+Select a language | Language: English
+
+Select your location | Country, territory or area: United Kingdom
+Configure the keyboard | Keymap to use: Hungarian
+Configure the network | Primary network interface: enp0s3
+Configure the network | Hostname: linuxdocker
+
+Configure the network | Domain name: (hagyjuk tiresen, vagy téréljiik) > Continue
+
+Set up users and passwords
+
+Root password: #Aa123456789@
+
+Full name for the new user: LinuxDockerAdmin
+Username for your account: linuxdockeradmin
+
+Choose a password for the new user: #Bb123456789@
+Partition disks | Partitioning method > Manual
+
+1. New partition size: 25 GB | Type: Primary | Location: Beginning | Use as: Ext4 | Mount
+point: / | Label: linuxdocker | Bootable flag: on
+
+2. New partition size: 3.6 GB | Type: Logical | Location: Beginning | Use as: Ext4 | Mount
+point: /home | Label: home | Bootable flag: off
+
+3. New partition size: 3.6 GB | Type: Logical | Use as: swap area | Bootable flag: off
+Configure the package manager
+
+Scan extra installation media? > No
+Debian archive mirror country > United Kingdom
+Debian archive mirror: deb.debian. org
+
+HTTP proxy information (blank for none): hagyjuk tiresen > Continue
+Configuring popularity-contest | Participate in the package usage survey? > No
+Software selection | Choose software to install:
+
+- SSH server
+- standard system utilities
+
+Configuring grub-pce | Install the GRUB boot loader to your primary drive? > YES
+Configuring grub-pe | Device for boot loader installation: ‘dev/sda
+
+Finish the installation > Continue
+
+© 2025 | Bok Péter
+
+==================================================
+Page 9:
+Az ujraindulas utan a root felhasznaloval lépjiink be!
+
+3.1 A Sudo beallitasa
+
+apt install sudo -y
+
+usermod -aG sudo linuxdockeradmin
+
+getent group sudo
+
+A konfiguralt, emelt joggal rendelkez6 felhasznalora val6 valtas:
+
+su - linuxdockeradmin
+
+3.2 IP cimzés konfiguralasa
+
+sudo mv /etc/network/interfaces /etc/network/interfaces.backup
+sudo systemctl enable systemd-networkd
+
+sudo nano /etc/systemd/network/10-nat.network
+
+Masoljuk az alabbi sorokat a fajlba:
+
+Mentstik a fajlt és lépjtink ki!
+sudo nano /etc/systemd/network/20-host-only.network
+
+Masoljuk az alabbi sorokat a fajlba:
+
+u
+
+Mentstik a fajlt és lépjtink ki!
+
+sudo systemctl restart systemd-networkd
+
+© 2025 | Bok Péter
+
+==================================================
+Page 10:
+3.3 DNS konfiguralasa
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install resolvconf -y
+
+sudo systemctl status resolvconf. service
+sudo systemctl start resolvconf. service
+
+sudo systemctl enable resolvconf.service
+sudo nano /etc/resolvconf/resolv.conf.d/head
+Masoljuk az alabbi sorokat a fajl végére:
+Mentstik a fajlt és lépjiink ki!
+
+sudo resolvconf --enable-updates
+sudo resolvconf -u
+
+sudo systemctl reboot
+
+Az ujrainditas utan jelentkezziink vissza a linuxdockeradmin felhasznaloval!
+
+3.4A ,,Guest Additions” kiegészit6 telepitése
+
+sudo apt install build-essential dkms linux-headers-$(uname -r) -y
+
+csatlakoztassuk a ,,Guest Additions” CD image fajlt
+
+8
+© 2025 | Bok Péter
+
+==================================================
+Page 11:
+sudo mkdir /mnt/cdrom
+
+sudo mount /dev/cdrom /mnt/cdrom
+
+cd /mnt/cdrom
+
+sudo sh ./VBoxLinuxAdditions.run --nox11
+
+sudo systemctl reboot
+
+Az Ujrainditas utan Putty-val jelentkezztink vissza a Host-only kartya IP cimét hasznalva! A
+
+csatlakozas utan a linuxdockeradmin felhasznaloval lépjiink be!
+
+3.5 Id6zona konfiguralasa
+
+sudo timedatectl set-timezone Europe/Budapest
+
+date
+
+4. A Docker telepitése
+
+sudo apt install ca-certificates curl gnupg Isb-release -y
+
+Adjuk hozza a Docker csomag GPG kulcsat a repository-hoz:
+
+(A GPG-kulcs egy tizenetek és fajlok aldirasara és titkositasdra hasznalhato nyilvanos kulcs.)
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o
+/ust/share/keyrings/docker-archive-keyring gpg
+
+Adjuk hozza a Docker csomag repository-t a Debian-hoz:
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-
+keyring. gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee
+/etc/apt/sources list.d/docker.list > /dev/null
+
+sudo apt update
+
+Telepitsiik a Docker-CE csomagot a kévetkez6 paranccsal:
+
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+
+Adjuk hozza a felhasznalot (linuxdockeradmin) a docker csoporthoz:
+
+sudo usermod -aG docker $(whoami)
+sudo systemctl reboot
+
+Az Ujrainditas utan jelentkezziink vissza Putty-val!
+
+Ellen6rizziik a telepitett Docker verziéjat: docker version
+
+© 2025 | Bok Péter
+
+==================================================
+Page 12:
+5. A Docker Hub és hasznalata
+
+A Docker Hub egy nyilvanos és privat tarolokat (repository) biztosito platform, amelyet a
+Docker fejlesztett ki. Ez a platform egy kézponti hely, ahol a fejleszték tarolhatjak, oszthatjak
+
+meg és kezelhetik a konténerképeiket (Docker Images).
+
+Alapvetéen egy "konténer kép piactér", amely megkénnyiti az alkalmazasok gyors telepitését
+
+és megosztasat.
+Mire hasznalhat6 a Docker Hub?
+
+Kész képek (images) letéltése: Nyilvanos tarolokban elérhetéek népszeri alkalmazasok
+
+hivatalos Docker képei (pl. Nginx, MySQL, Python).
+
+Sajat képek megosztasa: Feltélthetiink sajat készitésu képeket, és megoszthatjuk azokat mas
+
+fejlesztékkel.
+
+Automatikus képek épitése: Kapcsolhatjuk a GitHub vagy Bitbucket taroloinkhoz, hogy
+
+automatikusan létrehozza és frissitse a képeket.
+
+Privat tarolok: Sajat képek tarolasa, amelyeket csak meghatarozott személyek érhetnek el.
+
+5.1 Keresés a Docker Hub-on
+
+docker search <kulesszo>
+
+PL.:
+
+docker search httpd
+
+A parancs kilistazza a httpd-hez kapcsolddo publikus képeket a Docker Hub-rol.
+Hasznos opcidk:
+
+--filter: A keresési eredményeket szukiti kiilénb6z6 szempontok alapjan.
+
+pl.:
+
+Csak hivatalos képek keresése:
+
+docker search --filter "is-official=true" httpd
+
+Népszerti képek keresése (csillagok alapjan):
+
+docker search --filter "stars=1000" httpd
+
+10
+© 2025 | Bok Péter
+
+==================================================
+Page 13:
+A parancs csak azokat a képeket mutatja, amelyeknek legalabb 1000 csillagjuk van.
+
+--limit: Meghatarozza, hogy hany talalatot jelenitsen meg.
+
+pl.:
+
+docker search --limit 5 httpd
+
+A parancs csak az els6 5 talalatot mutatja meg.
+
+--no-trunc: A teljes leirast jeleniti meg (alapértelmezés szerint a hosszabb leirasok réviditve
+vannak)
+
+pl.:
+
+docker search --no-trunc httpd
+
+Mikor hasznaljuk?
+
+- Ha egy adott technologiahoz keresiink elére elkészitett Docker image-et.
+- Ha szeretnénk 6sszehasonlitani az elérhetd képek népszerlségét és megbizhatosagat
+(csillagok, hivatalos jelélés).
+
+- Ha uj image-eket szeretnénk felfedezni egy adott ceélra.
+
+A docker search egy gyors és egyszerti médja a Docker Hub felfedezésének!
+
+5.2 Kép (image) letéltése a Docker Hub-r6l
+docker pull <kép_neve>
+
+PL:
+
+docker pull httpd
+
+Ez a parancs letdlti az httpd hivatalos Docker képét a Docker Hub-rol.
+
+Sajat képek feltéltése:
+
+Hozzunk létre egy Dockerfile-t, majd készitsiik el a képet:
+docker build -t <felhasznalonév>/<kép_neve>:<verzio> .
+
+PL.:
+
+docker build -t username/myapp:1.0 .
+
+11
+© 2025 | Bok Péter
+
+==================================================
+Page 14:
+Ha mar meglév6 képet szeretnénk feltélteni, tag-eljiik:
+docker tag <helyi_kep> <felhasznalonév>/<kép_neve>:<verzio>
+Téltsiik fel a Docker Hubra:
+
+docker push <felhasznalonév>/<kép_neve>:<verzio>
+
+PL:
+
+docker push username/myapp: 1.0
+
+Privat tarolék kezelése:
+
+A Docker Hub lehetévé teszi privat tarolok létrehozasat, amelyekhez csak meghivott
+
+felhasznalok férhetnek hozza.
+Létrehozas:
+Lépjtink be a Docker Hub weboldalara, majd a Repositories meniiben valasszuk a "Create
+
+Repository" lehetéséget, és allitsuk a tarolot "Private"-ra.
+
+Hasznaljunk hivatalos képeket, amikor csak lehetséges, mivel ezek biztonsagosabbak és
+
+j6l karbantartottak!
+
+Ha nagyobb projekten dolgozunk, érdemes verzidszamokat hozzaadni a képeinkhez (pl. 1.0,
+
+latest stb.).
+
+5.3 Architektirak
+
+A Docker Hub lehetévé teszi, hogy kiilénbéz6 CPU-architekturakra késziilt image-eket
+hasznaljunk (pl. amd64, arm64, arm/v7). Ez fontos, ha kiilénbézé hardvereken futtatjuk a
+konténereket.
+
+Ellen6rzés:
+
+Az image tamogatott architekturait az adott image oldalan talaljuk:
+
+Menjiink a Docker Hub-on az image-re.
+
+Nézziik meg a "Supported architectures" részt.
+
+A httpd pl. tamogatja az alabbi architekturakat:
+
+amd64, arm32v5, arm32v6, arm32v7, arm64v8, i386, mips64le, ppc64le, riscv64, s390x
+
+12
+© 2025 | Bok Péter
+
+==================================================
+Page 15:
+A Docker automatikusan letdlti a megfelel6 architekturaju image-et, amely megfelel a
+
+rendszertinknek.
+
+pl.:
+
+docker pull httpd
+
+Ha konkrét architektirat akarunk kivalasztani:
+
+docker pull --platform linux/amd64 httpd
+
+5.4 Tag-ek
+
+A Docker image-ek ktilonb6z6 verzidit a tagek segitségével kezelhetjtik. Ezek altalaban
+verzioszamokat vagy kérnyezeti specifikaciokat jelélnek.
+PL:
+
+httpd image:
+
+httpd:2.4.62 - A httpd 2.4.62 verzio.
+httpd:2.4.62:alpine - Kis méreti, Alpine Linux alapu image.
+httpd:2.4.62-bookworm - Debian 12 Bookworm image.
+
+A Docker Hub-on, az image oldalan a ,,Tags” fiilon talaljuk az 6sszes elérhet6 tag-et.
+Ha pl. egy konkrét tag-et szeretnénk letélteni:
+
+docker pull httpd:2.4.62-bookworm
+
+Ha nem adunk meg taget, a latest (az alapértelmezett tag) keriil letdltésre.
+
+A Docker image-ek gyakran tamogatjak kornyezeti valtozok beallitasat, hogy testreszabhassuk
+
+a konténer mukédését.
+
+6. Egyszerti Docker konténerek futtatasa
+6.1 Egyszert ,,Hello, World!“ konténer
+docker pull hello-world:latest
+
+A docker pull paranccsal letoltjiik a hello-world image-et. A hello-world kép egy egyszert
+
+alkalmazast tartalmaz, amely tizenetet ir ki, ha sikeresen lefut.
+
+A : latest tag az image legutobbi (legfrissebb) verzidjat jeldli. Elhagyhato, abban az esetben is
+
+a legfrissebb verzio keril letdltésre.
+
+13
+© 2025 | Bok Péter
+
+==================================================
+Page 16:
+docker run --name helloworld-app hello-world
+A docker run parancs elinditja a letoltott képfajlt.
+A --name kapcsoloval nevet tudunk adni a konténernek.
+
+A parancs végrehajtasa utan a konténer kiirja, hogy a Docker sikeresen mukédik, és példat ad
+
+a konténerek muikédésére.
+
+6.2 Python interaktiv konzol futtatasa konténerben
+
+docker run --name python-console -it python:latest
+
+Ez a parancs egy interaktiv Python konzolt nyit a legfrissebb Python képbol.
+Ha nincs letéltve a Python image, a parancs letélti a legfrissebbet!
+irjunk Python kédot, példaul:
+
+print("Hello from Docker! ")
+
+Kilépés: Ctrl+D, vagy irjuk be az exit() parancsot.
+
+6.3 Egyedi parancs futtatasa konténerben
+docker run --name busybox-app busybox:latest ping -c 4 google.com
+
+A BusyBox egy olyan program, amely egy futtathatd binaris fajlban valdsitja meg a Unix
+rendszerekbél ismert egyszertsitett parancsok hasznalatanak lehetéségét.
+
+A -c 4 opcidoval meghatarozhatjuk, hogy 4 ICMP kérést kiildjén.
+
+6.4 Java alkalmazas futtatasa konténerben
+El6sz6r létre kell hoznunk a Java alkalmazasunkat, amit a konténerben fogunk futtatni:
+
+sudo apt update && sudo apt upgrade
+sudo apt install openjdk-17-jdk -y
+mkdir docker
+
+mkdir docker/javaapp
+
+cd docker/javaapp/
+
+Hozzuk létre az alabbi fajlt:
+nano main java
+
+14
+© 2025 | Bok Péter
+
+==================================================
+Page 17:
+Masoljuk a fajlba az alabbi kédot:
+
+Mentstik a fajlt és lépjtink ki!
+
+A javac eszk6zzel forditsuk le a java fajlt:
+
+javac main java
+
+Ez létrehoz egy main.class fajlt a konyvtarban.
+
+Készitsiink egy MANIFEST.MF fajlt:
+
+A .jar fajlhoz sziikség van egy MANIFEST.MF fajlra, amely megadja az indulo osztaly nevét.
+echo "Main-Class: main" > MANIFEST.MF
+
+A Main-Class értéke annak az osztalynak a neve, amely tartalmazza a main metodust.
+Hasznaljuk a jar eszk6zt a .jar fajl létrehozasahoz:
+
+jar cfm helloworld.jar MANIFEST.MF main.class
+
+c-uj jar fajl készitése.
+
+f - az eredményfajlt a helloworld jar-ba irja.
+
+m - hozzaadja a MANIFEST.MF fajlt.
+
+Ez létrehozza a helloworld.jar fajlt.
+
+Teszteljiik a .jar fajlt:
+
+java -jar helloworld jar
+
+Futtasuk a Java alkalmazasunkat egy OpenJDK konténerben:
+
+docker run --name helloworld-java -v $(pwd)/helloworld jar:/app/helloworld jar openjdk:17
+java -jar /app/helloworld jar
+
+- Az openjdk:17 kép egy Java kérnyezetet biztosit.
+
+- A-v opcioval a helyi helloworld jar fajlt csatoljuk a konténerbe.
+
+- A java -jar paranccsal futtatjuk a Java alkalmazast.
+
+15
+© 2025 | Bok Péter
+
+==================================================
+Page 18:
+6.5 Interaktiv Bash inditasa egy konténerben
+docker run --name intbash -it ubuntu:latest bash
+
+Ez a parancs elindit egy Ubuntu alapu konténert, nevet ad neki, és egy interaktiv Bash shell-t
+
+biztosit a konténeren beliil. Adjuk ki az exit parancsot a kilépéshez!
+
+A konténer tjrainditasa leallitas utan:
+
+docker start -ai intbash
+
+6.6 Webszerver telepitése konténerbe
+Toltsiik le a httpd (Apache2 webkiszolgal6) Docker image fajlt:
+docker pull httpd:latest
+
+docker run -d --name staticwebsite -v SHOME/docker/apache2-
+static:/usr/local/apache2/htdocs -p 8080:80 httpd
+
+Az Uj konténeriink létrejott!
+
+Elemezziik a fenti parancsot:
+docker run
+
+A docker run paranes elindit egy uj konténert az adott Docker image-bdl (ebben az esetben az
+httpd-bdl).
+
+-d
+
+Detached mod: A konténer a hattérben fut, igy a terminalunk nem lesz lefoglalva.
+
+--name staticwebsite
+
+Ez a paraméter a konténer nevét adja meg, ebben az esetben: staticwebsite. Ha nem adunk meg
+nevet, a Docker véletlenszert nevet general.
+
+-v $SHOME/docker/apache2-static:/usr/local/apache2/htdocs
+
+K6tet csatolasa:
+
+- A -v opcid egy helyi mappat (SHOME/docker/apache2-static) csatol a konténeren beliili
+utvonalhoz (/usr/local/apache2/htdocs). Ha nem létezik ez a mappa, a parancs létrehozza.
+
+- Ebben az esetben a helyi gé¢p SHOME/docker/apache2-static konyvtara tartalmazza a statikus
+weboldal fajlokat (HTML, CSS, JavaScript stb.).
+
+16
+© 2025 | Bok Péter
+
+==================================================
+Page 19:
+- A konténer beliilrél ezekhez a fajlokhoz az Apache szerver altal kiszolgalt tartalomként fér
+hozza.
+
+-p 8080:80
+
+Porttovabbitas:
+
+- Ahelyi gép 8080-as portjat a konténer 80-as portjara iranyitja at.
+
+- A gazdagép bongészdjében a http://192.168.56.99:8080 URL-en érjiik el az Apache szerver
+altal kiszolgalt weboldalt.
+
+httpd
+
+Ez a hasznalt Docker image neve, amely az Apache HTTP szerver hivatalos képe.
+
+A parancs elindit egy Apache HTTP szervert tartalmazo konténert, amely a helyi fajlokat a
+megadott mappabol (SHOME/docker/apache2-static/) szolgalja ki.
+
+Hozzunk létre egy egyszertt weboldalt a /home/linuxdockeradmin/docker/apache?2-static/
+
+nevu mappaban:
+
+sudo nano ~/docker/apache2-static/index.html
+
+Masoljuk az alabbi sorokat a fajlba:
+
+A linuxdocker virtualis gép béngészéjében igy érhetjiik el a weboldalt:
+
+A gazdageéprél http://192.168.56.99:8080 cimmel érjiik el a weboldalt!
+
+© 2025 | Bok Péter
+
+==================================================
+Page 20:
+6.7 A konténerek és képek kezelése
+
+A letéltétt image fajlok listazasa:
+
+docker images
+
+A létrehozott konténerek listazasa:
+
+docker ps -a
+
+docker ps: Alapértelmezés szerint csak az éppen futo konténereket listazza ki.
+
+-a (vagy --all) opcié: Az dsszes konténert megjeleniti, beleértve azokat is, amelyek lealltak
+
+vagy kiléptek.
+A kimenet altalaban a kévetkez6 oszlopokat tartalmazza:
+
+CONTAINER ID: A konténer egyedi azonositoja.
+
+IMAGE: A konténer létrehozasahoz hasznalt Docker image neve.
+COMMAND: A konténerben futd parancs.
+
+CREATED: Mikor lett a konténer létrehozva.
+
+STATUS: A konténer aktualis allapota (pl. Up, Exited, stb.).
+PORTS: A konténer altal hasznalt portok.
+
+NAMES: A konténer neve.
+
+Mire hasznalhat6?
+
+- Ledllt konténerek azonositasa: Azokat a konténereket is megmutatja, amelyek mar nem
+futnak.
+
+- Hibaelharitas: Informaciot ad arrol, hogy egy konténer miért allt le (pl. kilépési kodok).
+
+- Konténerek térlése: A nem szikséges, leallt konténereket kénnyebben megtalalhatjuk és
+tordlhetjiik (pl. docker rm <CONTAINER ID>).
+
+Ez a parancs kulesfontossagi, ha egy Docker-kérnyezetet menedzselni vagy
+hibaelharitani szeretnénk!
+
+A futé konténerek listazasa:
+
+docker container Is
+
+Ez a parancs alapértelmezés szerint csak a futo konténereket jeleniti meg. Nem mutatja azokat
+
+a konténereket, amelyek lealltak, vagy kiléptek.
+
+18
+© 2025 | Bok Péter
+
+==================================================
+Page 21:
+A futé konténer leallitasa:
+
+docker container stop </uto konténer neve>
+
+PL.:
+
+docker container stop staticwebsite
+
+A konténer neve az el6z6 parancs "NAMES" oszlopaban lév6 név.
+Konténer atnevezése:
+
+docker container rename <jelenlegi konténernév uj konténernév>
+PL.:
+
+docker container rename staticwebsite staticwebsite-apache2
+
+A leallitott konténer ujrainditasa:
+
+docker container start <konténer neve>
+
+docker container start staticwebsite-apache2
+
+Futo konténer tjrainditasa:
+
+docker container restart <konténer neve>
+
+pl.:
+
+docker container restart staticwebsite-apache2
+
+Konténer(ek) térlése:
+
+A konténer és az image térlését csak akkor hajtsuk végre, ha ténylegesen szeretnénk a
+
+konténert és az image fajlt térélni!
+docker container rm -f staticwebsite-apache2
+
+A -f (force) kapcsolé a konténer kényszeritett térlésére szol gal.
+
+Osszes konténer tirlése:
+docker container rm -f $(docker ps -aq)
+docker ps -aq:
+
+Ez a parancs kilistazza az Osszes konténer azonositdjat, beleértve a futo és leallt konténereket
+is. Az -q opcid (quiet) csak az azonositdkat adja vissza, nem jeleniti meg a teljes részleteket.
+
+19
+© 2025 | Bok Péter
+
+==================================================
+Page 22:
+S$(...):
+
+A parancsbehelyettesités segitségével a docker ps -aq kimenetét adja at argumentumként a
+docker container rm -f parancsnak. Gyakorlatilag a docker ps -aq altal visszaadott
+konténerazonositokat beilleszti a docker container rm -f parancsba.
+
+docker container rm -f:
+
+Ez kényszeritve térli a megadott konténereket, beleértve a futokat is. Az -f opcio automatikusan
+
+leallitja a futo konténereket a torlés eldtt.
+
+Osszességében a parancs minden konténert torél a rendszerbél, fiiggetleniil attdl, hogy azok
+futnak, lealltak, vagy kilépett allapotban vannak.
+
+Image fajl(ok) térlése:
+
+docker image rmi -f <image neve>
+
+pl.:
+
+docker image rmi -f httpd:latest
+
+Atmenetileg allitsuk le a staticwebsite-apache2 nevii konténert!
+
+7. Volume-ok
+
+A Docker volume egy Docker altal kezelt tarolomechanizmus, amely lehetévé teszi, hogy
+tartosan taroljunk adatokat a konténereken kiviil. A volume-ok az adatokat megérzik akkor is,
+ha a konténer leall vagy ujraépil, igy idealisak adatbazisok, fajlrendszerben tarolt adatok vagy
+barmilyen mas allando adatok kezelésére.
+
+1. Volume létrehozasa:
+
+docker volume create my_volume
+
+2. Volume csatlakoztatasa egy konténerhez:
+
+docker run -v my_volume:/data <képfajl neve>
+
+A docker run parancs segitségével csatlakoztathatjuk a volume-ot egy konténerhez.
+
+- my_volume a volume neve.
+
+- /data az ttvonal a konténer fajlrendszerében, ahol a volume elérhet6 lesz.
+
+20
+© 2025 | Bok Péter
+
+==================================================
+Page 23:
+3. Adatok megosztasa tébb konténer k6z6tt:
+docker run -v my_volume:/shared_data <képfajl1 neve>
+
+docker run -v my_volume:/shared_data <képfajl2 neve>
+
+Toébb konténer is hasznalhatja ugyanazt a volume-ot, igy az adatok konnyen megoszthatok.
+
+4. Volume-ok kezelése:
+
+Listazas:
+
+docker volume Is
+
+Torlés:
+
+docker volume rm my_volume
+Hasznalaton kiviili volume-ok térlése:
+
+docker volume prune
+
+Mikor hasznaljuk a volume-okat?
+
+- Ha adatokat szeretnénk tartdsan tarolni a konténereken kiviil.
+- Amikor az adatoknak tul kell élnie a konténer leallitasat, torlését vagy ujraépitéset.
+- Tébb konténer k6zétti adatmegosztashoz.
+
+- Olyan esetekben, amikor a gazdagép fajlrendszerének absztrakciojat akarjuk hasznalni.
+
+A Docker volume-ok egyszerti és hatékony mdédot nytjtanak az adatok kezelésére
+
+konténeres kérnyezetben.
+
+8. Kérnyezeti valtoz6k (Environment Variables)
+
+A Docker kérnyezeti valtozok (environment variables, env) olyan valtozok, amelyek értékei
+
+dinamikusan beallithatok, és a konténer futtatasa soran a konténer kérmyezetében elérheték.
+
+Ezeket az alkalmazasok futtatasahoz sztikséges konfiguraciok (pl. adatbazis URL, jelszo,
+
+portok) meghatarozasara hasznaljak.
+
+21
+
+© 2025 | Bok Péter
+
+==================================================
+Page 24:
+Mire j6k a kérnyezeti valtoz6k?
+
+- Konfiguralhatosag: Alkalmazasaink futasi paramétereit egyszeruen modosithatjuk, anélkil,
+hogy ujra kellene épiteni az image-et.
+
+- Biztonsag: Erzékeny informaciok (pl. jelszavak) kezelésére is alkalmasak, bar ezt évatosan
+kell kezelni.
+
+- Rugalmassag: Ugyanaz az image eltéré kornyezetekben (pl. fejlesztés, teszt, éles) mas-mas
+
+konfiguraciokkal futtathato.
+
+pl.:
+
+MySQL image:
+
+A mysql image-nél néhany hasznos kérnyezeti valtozo:
+
+MYSQL ROOT PASSWORD: Az admin felhasznalo jelszava.
+
+MYSQL DATABASE: Az inicializalando adatbazis neve.
+
+MYSQL_USER és MYSQL PASSWORD: Egy uj felhasznalo létrehozasa és annak jelszava.
+K6rnyezeti valtoz6k hasznalata:
+
+Beallitas futtataskor:
+
+A docker run parancsnal az -e opcioval adhatunk meg kérnyezeti valtozokat:
+
+pl.:
+
+docker run -e DATABASE URL=mysq]://user:password@host/db <képfajl neve>
+K6rnyezeti valtoz6k fajlbdl:
+
+Ha toébb kérnyezeti valtozot szeretnénk kezelni, hasznalhatunk egy -env fajlt:
+
+A .env fajl tartalma:
+
+DATABASE URL=mysql://user:password@host/db
+API KEY=12345
+
+Hasznalat futtataskor:
+docker run --eny-file .env <képfajl neve>
+
+A kornyezeti valtozok egyszerl, mégis erdteljes eszk6zt kinalnak a konténerizalt alkalmazasok
+
+konfiguralasara és testreszabasara.
+
+22
+© 2025 | Bok Péter
+
+==================================================
+Page 25:
+9. A Docker és a Visual Studio Code ésszekapcsolasa
+
+Visual Studio Code
+
+Lf
+
+Remote -
+
+Remote Development
+
+em
+
+Gitpod Remote
+
+ct
+
+Remote KH (SSH)
+
+Copy GitHub URL (Remote SSH)
+
+toltstik le és telepitsik VSCode-ban a Remote-SSH beépiilé modult
+
+A Remote-SSH beépiilé modul konfiguralasa és csatlakozas a tavoli szamitogéphez:
+
+OUTLINE
+
+?
+>
+
+TIMELINE
+
+oA0 Wo
+
+23
+© 2025 | Bok Péter
+
+==================================================
+Page 26:
+Connect to Host... Remote-SSH
+
+Connect Current Window to Host...
+
+Tunnel Install
+
+Container
+
+GitHub Codespace
+
+Remote Repository
+
+New SS
+
+ttings
+Help
+
+Host
+HostName
+User
+
+Host: linuxdocker
+HostName: 192.168.56.99
+User: linuxdockeradmin
+
+24
+© 2025 | Bok Péter
+
+==================================================
+Page 27:
+J File Edit Selection View --- D Search
+New Text File Ctri+N
+New File... Ctri+Alt+Windows+N
+New Window Ctrl+Shift+N
+
+New Window with Profile
+
+Open File.. Ctri+0
+Open Folder. Ctri+K Ctri+0
+Open Workspace from File...
+
+Open Recent
+
+‘Add Folder to Workspace...
+Save Workspace As...
+
+Duplicate Workspace
+
+Save Ctri+s
+
+Save As. Ctri+Shift+S
+
+Share
+
+Auto Save
+
+Preferences
+
+Revert File
+Close Editor Ctrl+F4
+
+Close Window Alt+F4.
+
+Exit
+
+My @oA0 Wo Ln 4, Col 26 s:4 UTF-8 CRLF SSH Ci
+
+mentstik el a konfiguraciot
+
+> OUTLINE
+> TIMELINE
+“| ®GoAo Wo
+
+Connect to Host...
+
+Connect Current Window to Host...
+Tunnel
+
+Dev Container
+
+WSL
+
+GitHub Codespace
+
+Remote Repository
+
+© 2025 | Bok Péter
+
+
+==================================================
+Page 28:
+Linux
+
+Windows
+
+macOS
+
+“linuxdocker™ has fingerprint "SHA256:dwr4PIKAlqciV
+
+yv3ZUkHeQeEVwXDEUwvOlhwxkK4jo".
+
+Continue
+
+Cancel
+
+Press ‘Enter’ to confirm your input or ‘Escape* to cancel
+
+jelsz6: #Bb123456789@
+
+“J Welcome x
+
+Start Walkthroughs
+Bnew File
+
+ce tarted with VS Code
+©) opentie ae
+B open Folder
+
+@ Learn the Fundamentals
+
+26
+
+© 2025 | Bok Péter
+
+==================================================
+Page 29:
+8Y Extension: Docker X
+
+docker
+
+Docker
+Docker 0.21 5 Microsoft @ i @ 40,223.880 x
+Makes it to create id d...
+veg sae A esac Makes it easy to create, manage, and debug contain...
+@ Microsoft install
+
+Install \/ Auto Update
+Docker Explorer 2
+
+DETAILS
+
+Docker Compose
+anage Docker Compose se . : Marketpl
+
+é pial Docker for Visual Studio Code ce
+. version vi.29.3 installs 40M)
+
+Docker Linter AS
+~s tt pert, p orr The Docker extension makes it easy to build,
+Henrik Sj6ah
+
+manage, and deploy containerized applic
+
+Identifier ms-
+
+ee eee from Visual Studio Code. It also provid
+
+debugging of Nodejs, Python, and .NET i
+
+container. > Last
+Released
+
+Docker Run
+
+ut Linuxdockeradmin@Linuxdocker :~$
+
+PHP: Unit Test Explorer Ul... @ 167
+
+Install
+
+Docker Runner
+
+» SSH: linuxdocker
+
+© Open a Workspace Folder
+
+Open a workspace folder to get started with Docker extension features.
+
+Open Folder
+
+Cri+K G@i+0O
+
+Explorer
+
+valasszuk ki a munkamappankat
+
+© 2025 | Bok Péter
+
+
+==================================================
+Page 30:
+Add Folder to Workspace
+
+/home/linuxdockeradmin/
+
+cache
+
+dotnet
+
+local
+.wscode-server
+docker
+
+Add Folder to Workspace
+
+/home/linuxdockeradmin/docker/
+
+apache2-static
+
+javaapp
+
+Press ‘Enter’ to confirm your input or ‘Escape’ to cancel
+
+Do you trust the authors of the files in this folder?
+
+Code provides features that may automatically execute files in this
+folder.
+
+If you don't trust the authors of these files, we recommend to continue
+in restricted mode as the files may be malicious. See our docs to learn
+
+more,
+
+~/docker [SSH: linuxdocker]
+
+| Trust the authors of all files in the parent folder ‘linuxdockeradmin‘
+
+Yes, | trust the authors No, | don't trust the authors
+
+Trust folder and enable all features Browse folder in restricted mode
+
+© 2025 | Bok Péter
+
+
+==================================================
+Page 31:
+Hi
+
+J Welcome x
+
+Go Back
+
+Getting Started with Docker
+
+© Add Docker Files to Workspace
+
+javaapp
+
+ha az OK utan megszakad a kapcsolat, csatlakozzunk Wyjra
+
+9.1 Konténerek kezelése VSCode-ban
+
+contexts
+HELP AND FEEDBACK
+
+aH] Read Extension Doc
+
+29
+© 2025 | Bok Péter
+
+==================================================
+Page 32:
+Bal oldalon a Docker ikonjara kattintva kezelhetjiik a konténereket, képeket, haldzatokat,
+
+kéteteket stb.
+
+Inditsunk el konténereket:
+
+File Edit Selection View Search
+
+v CONTAIN!
+
+File Edit Selection View
+DOCKER
+
+CONTAINERS
+
+IMAGES
+> Bi busybox
+
+Remove.
+
+@ OB msstatiwebsite
+® localhost:
+
+Welcome to my website!
+
+> OD ubuntu
+> Oc
+
+30
+
+© 2025 | Bok Péter
+
+==================================================
+Page 33:
+*J File Edit Selection view ++ eonad - a
+
+View Logs
+Attach Shell
+Inspect
+Open in Br
+
+Stop
+
+~ IMAGES
+
+> Eb Remove.
+
+\ CONTAINERS
+
+> EB ubuntu
+
+REGISTRIES
+
+> NETWORKS
+
+> VOLUMES
+CONTEXTS
+
+/ HELP AND FEEDBACK
+
+elindult a konténeren beliili terminal
+az exit paranccsal tudunk kilépni, majd barmelyik billentyt lenyomasa utan bezarodik a
+terminal ablaka
+
+A konténereket Ujra tudjuk inditani, le tudjuk allitani, valamint megtekinthetjik a log
+
+bejegyzéseket, a konténereken beliili fajlokat stb.
+
+31
+© 2025 | Bok Péter
+
+==================================================
+Page 34:
+Képek (images) kezelése:
+
+~ IMAGES
+> E41 busybox
+@ > G hello-world
+~ EJ httpd
+WI lat
+> EJ openjd
+> EJ python
+
+Run
+
+Run Interactive
+
+> £4 ubuntu Inspect
+
+Pull
+
+Full Tag
+
+Remove...
+
+a képek helyi mentijében tudjuk futtatni a képet (interaktiv modban is), letdlteni (a meglévé
+
+image legujabb valtozatat), feltélteni (megosztani) a Docker Hub-on, cimkézni, térélni stb.
+
+s: Inspect
+
+Open in Browser
+
+View Li
+
+‘onfigure
+
+ocker Context Help
+
+a keresésavban szamos tovabbi Docker funkcidt elérhetiink
+
+32
+© 2025 | Bok Péter
+
+==================================================
+Page 35:
+10. Szolgaltatasok 6sszekapcsolasa (t6bb konténer egyidejii futtatasa)
+10.1 Joomla! CMS rendszer telepitése Docker konténerbe
+
+A Joomla! alapu weboldal futtatasahoz Docker konténerekben sztikség van egy Joomla!
+konténerre (amely tartalmazza a Joomla! és a webszerver kérnyezetet), valamint egy MySQL
+
+vagy MariaDB konténerre az adatbazis kezeléséhez.
+
+Hozzunk létre egy egyedi Docker-halézatot:
+
+A kulén halozat biztositja, hogy a Joomla! és a MySQL konténerek kommunikalni tudjanak
+
+egymassal.
+docker network create joomla_network
+
+Ez a parancs virtualis halozatot hoz létre, amelyhez a Joomla! és a MySQL konténerek
+csatlakozhatnak.
+
+Inditsunk egy MySQL konténert:
+
+A Joomla! adatbazisanak kezeléséhez sziikségiink lesz egy MySQL vagy MariaDB konténerre.
+Az alabbi parancs elinditja a MySQL konténert, és biztositja az adatbazis perzisztenciajat
+egy Docker-volume segitségével:
+
+docker run --name joomla_db --network joomla_network -e
+MYSQL_ROOT_PASSWORD=#Aal23456789@ -e MYSQL_DATABASE=joomla -e
+MYSQL _USER=joomla_user -e MYSQL_PASSWORD=#mysq112345@ -v
+
+mysql _data:/var/lib/mysql -d mysql:latest
+
+- docker run: Ez egy uj konténert indit a megadott beallitasokkal.
+
+--name joomla_db: A konténer neve. Ezt hasznaljuk majd a Joomla! adatbazis-kapcsolat
+
+konfiguralasahoz.
+
+--network joomla_network: A konténer csatlakozik a korabban létrehozott Docker-
+haldézathoz.
+-e opcidk (kérnyezeti valtoz6k): Beallitjak a MySQL konfiguraci6t:
+
+- MYSQL_ROOT_PASSWORD: A MySQL root felhasznalo jelszava.
+- MYSQL DATABASE: Létrehoz egy adatbazist, amelyet a Joomla! fog hasznalni.
+- MYSQL_USER és MYSQL_PASSWORD: Létrehoz egy uj felhasznalot az adatbazishoz.
+
+33
+© 2025 | Bok Péter
+
+==================================================
+Page 36:
+-v mysql_data:/var/lib/mysql: Egy volume-ot csatol a MySQL adatbazis tarolasara. Ez
+
+biztositja, hogy az adatok megmaradjanak a konténer Ujrainditasa utan is.
+
+mysql:latest: A hivatalos MySQL Docker-kép legfrissebb verzidjat hasznalja.
+
+Inditsuk el a Joomla! konténert:
+
+docker run --name joomla_website --network joomla_network -p 8082:80 -v
+joomla_data:/var/www/html -e JOOMLA DB HOST=joomla_db -e
+JOOMLA_DB_USER=joomla_user -e JOOMLA_DB_PASSWORD=#mysq112345@ -e
+JOOMLA DB NAME=joomla -d joomla
+
+1. docker run
+
+Ez egy uj konténert indit a megadott beallitasokkal.
+
+2, --name joomla_website
+A konténer neve joomla_website lesz. Ez egyedi névvel azonositja a konténert, amely késébb
+
+hasznalhato példaul parancsok futtatasahoz vagy naplok lekéréséhez.
+
+3. --network joomla_network
+A Joomla! konténer a joomla_network nevii Docker-halozathoz csatlakozik. Ez lehetdévé teszi,
+hogy a konténer kommunikaljon mas konténerekkel (példaul egy MySQL konténerrel) ezen a
+
+halozaton keresztiil.
+
+4. -p 8082:80
+
+Porttovabbitas a host és a konténer k6zétt:
+
+A 8082-as port a host gépen a Joomla! weboldalhoz lesz hozzarendelve.
+
+A 80-as port a konténerben futo Apache webszerver alapértelmezett portja. A gazdagép
+
+béngészdjében elérhetjik a Joomla! oldalt a http://192.168.56.99:8082 cimen.
+
+5. -v joomla_data:/var/www/html
+
+Ez egy volume csatolasa:
+
+A joomla_data Docker volume lesz hasznalva a Joomla! weboldal fajljainak tarolasara.
+
+A konténeren beliil a Joomla! fajlrendszere a /var/www/html mappaban talalhato. Ez azt
+
+jelenti, hogy a fajlok tartosak maradnak, még akkor is, ha a konténert ujrainditjuk.
+
+6. Kérnyezeti valtoz6k: -e
+JOOMLA DB _HOST=joomla_db
+A Joomla! szamara itt megadjuk az adatbazis hosztjat. joomla_db a MySQL konténer neve a
+
+Docker-halozaton beliil.
+
+34
+© 2025 | Bok Péter
+
+==================================================
+Page 37:
+JOOMLA_DB_USER=joomla_user
+Az adatbazis-felhasznalé neve, amely a Joomla! telepitéséhez sziikséges. Ez megegyezik a
+
+MySQL konténer inditasakor létrehozott felhasznalonévvel.
+
+JOOMLA DB PASSWORD=#mysql12345@
+Az adatbazis-felhasznalo jelszava. A Joomla! ezt hasznalja az adatbazishoz valo
+
+csatlakozashoz.
+
+JOOMLA_DB_NAME=joomla
+
+Az adatbazis neve, amelyet a Joomla! hasznal. Ennek meg kell egyeznie a MySQL konténerben
+létrehozott adatbazis nevével.
+
+7.-d
+
+Ez a parancs "detached" modban futtatja a konténert, vagyis a hattérben futtatja azt, anélkil,
+hogy a terminalhoz lenne csatolva.
+
+8. joomla
+
+Ez a Docker Hub-rol letoltott Joomla! képet jeloli, amelyet a konténer futtat.
+
+Ha a futé konténeriink fajljait szeretnénk megnézni, médositani, akkor adjuk ki az alabbi
+parancsot:
+
+docker exec -t -i joomla website /bin/bash
+
+A parancs egy konténeren beltil egy interaktiv Bash shell-t indit.
+
+docker exec: Ez a Docker parancs lehetévé teszi, hogy egy mar futo konténerben parancsot
+
+futtassunk.
+
+-t: Ez az opcid egy "terminalt" (pszeudo-TTY) nyit a parancshoz, igy interaktiv munkavégzésre
+
+alkalmas kérnyezetet hoz létre.
+
+-i: Ez az opcio lehetévé teszi az interaktivitast, vagyis a billentytizetrél érkez6 bemenet
+
+tovabbitasat a konténeren beliili parancshoz.
+
+joomla_website: Ez a konténer neve vagy azonositdja, amelyben a parancsot futtatni
+
+szeretnénk. Ebben az esetben egy "jJoomla_website" nevi konténerr6l van szo.
+
+/bin/bash: Ez a parancs a konténerben. A /bin/bash inditasaval egy Bash shell-t inditunk, amely
+lehetové teszi a konténer belsejében lévd fajlrendszer és kornyezet felfedezését, illetve
+
+parancsok futtatasat.
+
+35
+© 2025 | Bok Péter
+
+==================================================
+Page 38:
+Is
+
+apt update
+
+apt install nano -y
+
+(Ezutan tudjuk szerkeszteni a konténerben lévé fajlokat.)
+exit
+
+Konfiguraljuk a Joomla!-t a béngész6ben:
+
+A gazdagéprol http://192.168.56.99:8082 cimmel érjiik el a telepitot:
+
+@
+
+Bf soomiat %q Joomla Installer
+GB Select Installation Language
+Select Language
+
+setup Site Name
+
+Enter the name of your Joomla site.*
+
+[eonaenwaone
+
+Setup Login Data >
+
+%g Joomla Installer Loomis:
+
+@ Login Data
+
+Enter the real name of your Super User. *
+
+Administrator
+
+Set the username for your Super User account. *
+
+administrator
+
+Set the password for your Super User account. *
+
+i)
+
+Password accepted
+Enter at least 12 characters.
+
+Enter the email address of the website Super User. *
+
+Setup Database Connection >
+
+|
+
+jelsz6: #Aa123456789@
+e-mail cim: ha valos kornyezetben fut a weboldal, akkor az adminisztrator e-mail cime
+
+36
+© 2025 | Bok Péter
+
+==================================================
+Page 39:
+%g Joomla Installer ,<omia 52.1
+S Database Configuration
+
+Select the database type. *
+
+MySQLi
+
+Enter the host name, usually "localhost" or a name provided by your host. *
+
+joomla_db
+
+Enter the database username you created or a username provided by your host. *
+
+joomla_user
+
+Enter the database password you created or a password provided by your host.
+
+|
+
+Enter the database name. *
+
+Enter a table prefix or use the randomly generated one. *
+
+uvfkp_
+
+Ifyou are using an existing database with tables with the same prefix, Joomla will rename those
+existing tables by adding the prefix "bak_”
+
+Connection Encryption *
+
+Default (server controlled) v
+
+Install Joomla >
+
+jelsz6: #mysq!12345@
+(valos kornyezetben erdésebb jelszot adjunk)
+
+W® Congratulations!
+
+Congratulations! Your Joomla site is ready.
+
+Install Additional Languages >
+© Open Site
+
+@ Open Administrator
+
+37
+
+© 2025 | Bok Péter
+
+==================================================
+Page 40:
+CASSIOPEIA
+
+You are here: Home Main Menu
+Home “ome
+Login Form
+Password °
+
+Remember Me
+
+d?
+
+Forgot you
+
+Forgot your use
+
+11. A Docker Compose
+
+A Docker Compose egy eszkéz, amely lehetévé teszi tébb Docker-konténer egyidejti kezeléseét.
+Az alkalmazasokat egy compose.yaml fajlban konfiguraljuk, amely tartalmazza a konténerek
+definicidit, példaul:
+
+- képek
+
+- halozati beallitasok
+
+- kérmyezeti valtozok
+
+- volume-ok
+
+A Docker Compose telepitése:
+
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-
+$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker compose version
+
+11.1 YAML fajl létrehozasa és konfiguralasa (WordPress telepitése)
+
+A Docker Compose YAML fajl beallitasahoz és a Docker Compose mtk6édésének
+bemutatasahoz egy, a Joomla!-hoz hasonlo CMS rendszert, a WordPress-t konfiguraljuk és
+telepitjtik.
+
+mkdir ~/docker/wordpress
+nano ~/docker/wordpress/compose.yaml
+
+38
+© 2025 | Bok Péter
+
+==================================================
+Page 41:
+Masoljuk a fajlba az alabbi konfiguraciét:
+
+Mentstik a fajlt és lépjiink ki!
+
+Ez egy Docker Compose konfiguracids fajl, amely két szolgaltatasbol (konténerbdl) all: egy
+MariaDB (MySQL-kompatibilis) adatbazisszerverbél és egy WordPress CMS rendszerbdl.
+
+1. services:
+Ez hatarozza meg a kiil6nbéz6 szolgaltatasokat, amelyeket Docker-konténerekként fogunk
+
+futtatni.
+
+Szolgaltatas: db
+Ez a szolgdltatas egy MariaDB (MySQL-kompatibilis) adatbazisszervert futtat:
+
+image: mariadb: A mariadb Docker-képet hasznalja, amely tartalmazza a MariaDB
+
+adatbazis-szervert.
+
+39
+© 2025 | Bok Péter
+
+==================================================
+Page 42:
+container_name: wordpress db: A konténer neve wordpress _db lesz. Ez egyedi
+
+azonositasra szolgal.
+volumes:
+A db_data nevi Docker-volume-ot csatolja a konténer /var/lib/mysql kényvtarahoz.
+
+Ez biztositja, hogy az adatbazis-allomanyok (pl. tablak, adatok) tartoésak maradjanak, még
+
+akkor is, ha a konténer térlédik vagy ujraindul.
+
+environment: Kémyezeti valtozok, amelyek az adatbazis-konfiguraciot adjak meg:
+
+MYSQL_ROOT_PASSWORD: Az adatbazis root jelszava (4Aa123456789@).
+MYSQL_DATABASE: Az adatbazis neve (wp_db), amelyet a WordPress hasznalni fog.
+MYSQL_USER: Az adatbazis-felhasznalo neve (wp_mysql_user).
+MYSQL_PASSWORD: Az adatbazis-felhasznal6 jelszava (#mysql12345@).
+
+expose: Csak a Docker-haldozaton beliil teszi elérhetévé a kovetkezé portokat:
+3306: Az alapértelmezett MariaDB/MySQL port.
+
+33060: MariaDB SQL protokollokkal valo kapcsolodashoz hasznalt port.
+Szolgaltatas: wordpress
+
+Ez a szolgaltatas egy WordPress webalkalmazast futtat:
+
+image: wordpress: A wordpress Docker-képet hasznalja, amely tartalmazza a WordPress
+alkalmazast és annak futtatasahoz sztikséges kérnyezetet (PHP, Apache).
+
+container_name: wordpress_website: A konténer neve wordpress_website lesz.
+
+volumes:
+
+A wp_data nevi Docker-volume-ot csatolja a konténer /var/www/html kényvtarahoz.
+
+Ez biztositja, hogy a WordPress fajlok (példaul feltdltétt képek, bévitmények) tartosak
+maradjanak.
+
+ports:
+
+A konténer belsé 80-as portjat a gazdagép 8084-es portjara iranyitja at.
+
+40
+© 2025 | Bok Péter
+
+==================================================
+Page 43:
+environment: Kérnyezeti valtozok, amelyek a WordPress adatbaziskapcsolatat konfiguraljak:
+WORDPRESS _DB_HOST: Az adatbazis-hoszt neve (db). Ez a db szolgaltatas Docker-
+
+halozati neve, igy a WordPress ezen keresztiil éri el az adatbazist.
+
+WORDPRESS DB_USER: Az adatbazis-felhasznalo neve (wp_mysql_user), amely
+megegyezik az adatbazis szolgaltatasban beallitott értékkel.
+
+WORDPRESS _DB_PASSWORD: Az adatbazis-felhasznalo jelszava (#mysql12345@),
+amely szintén megegyezik a db szolgaltatasban megadott értékkel.
+
+2. Volume-ok:
+
+A fajl implicit modon definial két Docker-volume-ot:
+
+db_data: Az adatbazis fajljainak tartds tarolasara szolgal.
+
+wp_data: A WordPress fajljainak tarts tarolasara szolgal.
+
+Ezek a volume-ok automatikusan létrejonnek a docker compose up parancs futtatasakor.
+
+A fenti konfiguracio egy WordPress alapu weboldal telepitésére alkalmas, amelyhez egy
+MariaDB adatbazis-szerver tartozik. Az adatbazis és a webalkalmazas a Docker-halozaton
+keresztiil kommunikal egymassal. A volume-ok segitségével az adatok és fajlok megérzédnek,
+még ha a konténereket le is allitjak vagy torlik.
+
+A futtatas lépései:
+
+cd ~/docker/wordpress/
+
+docker compose up -d
+
+Konfiguraljuk a WordPress-t a bongészében:
+
+A gazdagéprol http://192.168.56.99:8084 cimmel érjiik el a weboldalt (a WordPress
+telepitdjét):
+
+41
+© 2025 | Bok Péter

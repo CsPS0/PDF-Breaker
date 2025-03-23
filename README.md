@@ -50,17 +50,3 @@ Disclaimer
 This tool is intended for legal and ethical purposes only. Ensure that you have permission to manipulate any PDFs you are working with.
 
 markdown
-Másolás
-Szerkesztés
-
-This markdown file includes:
-
-1. **Project Title and Description**
-2. **Requirements** for Python and dependencies
-3. **Features** of the application
-4. **How to use the tool** and run it
-5. **Interface Overview**
-6. **License Information**
-7. **Disclaimer**
-
-Let me know if you'd like any additional information!
