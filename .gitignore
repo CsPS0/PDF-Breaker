@@ -23,12 +23,7 @@ personal_script.sh
 
 *.bak
 
-*.pdf
-
 *.webp
 *.jpg
 
 *.vs
-
-app-test.py
-imgtotext.py
