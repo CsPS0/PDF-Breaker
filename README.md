@@ -1,76 +1,99 @@
-# PDF-Breaker
+# PDF Processor
 
-**PDF OCR and Unlock Tool**
-Extract text from PDFs using OCR or remove passwords via manual entry or brute force.
-
-## Requirements
-
-- Python 3.12.6 or higher
-- Required Python packages:
-    - `pytesseract`
-    - `pdf2image`
-    - `pikepdf`
-    - `Pillow` (for image processing)
-
-Install the required packages with:
-
-```bash
-pip install pytesseract pdf2image pikepdf Pillow
-```
-
+A comprehensive PDF processing application that combines OCR (Optical Character Recognition) and PDF unlocking capabilities in a user-friendly GUI interface.
 
 ## Features
 
-- **OCR (Optical Character Recognition):**
-Extract text from PDFs by converting pages to images and using OCR to read the text.
-- **Unlock PDF with Password:**
-Unlock password-protected PDFs by entering the password manually.
-- **Brute Force PDF Unlocking:**
-Attempt to unlock password-protected PDFs by trying combinations of letters and numbers.
+- **OCR Processing**: Extract text from PDF files and save it to a text file
+- **PDF Unlocking**: Remove password protection from PDF files
+  - Manual password entry
+  - Brute force password cracking (for simple passwords)
 
+## Prerequisites
 
-## Usage
+- Python 3.7 or higher
+- Tesseract OCR engine
+- Poppler (for PDF to image conversion)
+- Required Python packages:
+  ```bash
+  pip install pikepdf>=8.11.2
+  pip install pdf2image>=1.17.0
+  pip install pytesseract>=0.3.10
+  ```
 
-1. **Select PDF File:**
-Choose the PDF you want to process.
-2. **Set Export Path:**
-Choose the folder where output files will be saved.
-3. **Choose an Option:**
-    - Use **OCR** to extract text from the PDF.
-    - Use **Unlock PDF with Password** if you know the password.
-    - Use **Brute Force Unlock** to try multiple password combinations automatically.
+### Installing Prerequisites
 
-## How to Run the Application
+#### Windows:
+1. Install Tesseract OCR:
+   - Download the installer from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
+   - Add Tesseract to your system PATH
 
-1. Clone or download this repository.
-2. Install the dependencies:
+2. Install Poppler:
+   - Download from [poppler releases](http://blog.alivate.com.au/poppler-windows/)
+   - Extract to a folder (e.g., C:\poppler-xx.xx.x)
+   - Add the bin folder to your system PATH
 
+#### Linux:
+```bash
+sudo apt-get update
+sudo apt-get install tesseract-ocr
+sudo apt-get install poppler-utils
+```
+
+#### macOS:
+```bash
+brew install tesseract
+brew install poppler
+```
+
+## Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/pdf-processor.git
+cd pdf-processor
+```
+
+2. Install Python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run the application:
-
+Alternatively, you can install the packages individually:
 ```bash
-python app-test.py
+pip install pikepdf>=8.11.2
+pip install pdf2image>=1.17.0
+pip install pytesseract>=0.3.10
 ```
 
-This will open the application window where you can interact with the tool.
+## Usage
 
-## Interface Overview
+1. Run the application:
+```bash
+python pdf_cracker/pdf_processor.py
+```
 
-The application has two main tabs:
+2. The application has two main tabs:
 
-- **OCR Tab:**
-Extract text from a PDF using OCR. Select a PDF, specify the export path, and start the OCR process.
-- **Unlock PDF Tab:**
-Enter a password to unlock a PDF manually or attempt to brute force the password.
+### OCR Tab
+- Click "Browse" to select a PDF file
+- Choose an export directory
+- Click "Start OCR" to begin text extraction
+- The extracted text will be saved to a text file in the chosen directory
 
+### Unlock PDF Tab
+- Click "Browse" to select a password-protected PDF
+- Choose an export directory
+- Either:
+  - Enter the known password and click "Unlock with Password"
+  - Click "Brute Force Unlock" to attempt to crack the password
+
+## Notes
+
+- The brute force feature is limited to simple passwords (length 1-4 characters) by default
+- For longer passwords, modify the `range(1, 5)` in the `brute_force_pdf` method
+- OCR accuracy depends on the quality of the PDF and the Tesseract installation
 
 ## License
 
-This project is licensed under the MIT License.
-
-## Disclaimer
-
-This tool is intended for legal and ethical purposes only. Ensure you have permission to manipulate any PDFs you are working with.
+This project is licensed under the MIT License - see the LICENSE file for details.
